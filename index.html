@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفوان القليطي — بورتفوليو</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary:      #f0f4ff;
+      --accent:       #4f46e5;
+      --accent-light: #6366f1;
+      --accent-glow:  rgba(99,102,241,0.10);
+      --surface:      #ffffff;
+      --surface2:     #f5f7ff;
+      --border:       rgba(99,102,241,0.14);
+      --text:         #0f172a;
+      --text-muted:   #64748b;
+      --success:      #0891b2;
+      --gold:         #d97706;
+      --shadow:       0 2px 20px rgba(99,102,241,0.08);
+      --shadow-hover: 0 8px 40px rgba(99,102,241,0.16);
+      --radius:       16px;
+      --transition:   0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--primary);
+      color: var(--text);
+      font-family: 'Tajawal', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      direction: rtl;
+    }
+
+    body.ltr {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+    }
+
+    /* ── BACKGROUND DECORATION ── */
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+    }
+    .bg-blob-1 { width: 700px; height: 700px; background: #818cf8; top: -200px; left: -200px; }
+    .bg-blob-2 { width: 500px; height: 500px; background: #22d3ee; bottom: -150px; right: -150px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(240,244,255,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .lang-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--accent);
+      padding: 0.4rem 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: all var(--transition);
+      font-family: inherit;
+    }
+    .lang-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ── LAYOUT ── */
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 0 4rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* flip avatar to correct side per direction */
+    body:not(.ltr) .hero-inner { grid-template-columns: auto 1fr; }
+    body:not(.ltr) .hero-inner > div:last-child { order: -1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(99,102,241,0.2);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 60%, var(--success) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      max-width: 560px;
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+
+    /* ── CONTACT CHIPS ── */
+    .hero-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color var(--transition);
+      /* keep phone/email reading LTR regardless of page direction */
+    }
+    .contact-chip:hover { color: var(--accent); }
+    .contact-chip svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent-light); }
+
+    /* phone & email content stays LTR */
+    .chip-text-ltr {
+      direction: ltr;
+      unicode-bidi: embed;
+      display: inline-block;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.875rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      color: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px rgba(79,70,229,0.3);
+      font-family: inherit;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(79,70,229,0.45);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      color: var(--accent);
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: all var(--transition);
+      font-family: inherit;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* ── AVATAR ── */
+    .hero-avatar { flex-shrink: 0; }
+
+    .avatar-ring {
+      width: 210px; height: 210px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--success));
+      padding: 3px;
+      box-shadow: 0 0 50px rgba(99,102,241,0.25);
+    }
+
+    .avatar-inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -3px;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header { margin-bottom: 3rem; }
+
+    .section-label {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .section-divider {
+      width: 50px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      border-radius: 99px;
+      margin-top: 0.875rem;
+    }
+
+    /* RTL: divider stays inline-start */
+    body:not(.ltr) .section-divider { margin-right: 0; }
+
+    /* ── SKILLS ── */
+    #skills { padding: 6rem 0; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1rem;
+      text-align: center;
+      transition: all var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .skill-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .skill-icon  { width: 2.2rem; height: 2.2rem; margin: 0 auto 0.6rem; display: block; object-fit: contain; }
+    .skill-name  { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+
+    /* ── EXPERIENCE ── */
+    #experience { padding: 6rem 0; background: var(--surface2); }
+
+    .timeline { position: relative; }
+
+    /* LTR timeline line */
+    body.ltr .timeline { padding-left: 2.5rem; }
+    body.ltr .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+    body.ltr .timeline-item { padding-left: 2rem; }
+    body.ltr .timeline-dot  { left: -2.6rem; right: auto; }
+
+    /* RTL timeline line */
+    body:not(.ltr) .timeline { padding-right: 2.5rem; }
+    body:not(.ltr) .timeline::before {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+    body:not(.ltr) .timeline-item { padding-right: 2rem; }
+    body:not(.ltr) .timeline-dot  { right: -2.6rem; left: auto; }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 1.1rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--surface2);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+    }
+
+    .timeline-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      transition: all var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .timeline-card:hover {
+      border-color: var(--accent-light);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-role    { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+    .timeline-company { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-top: 0.2rem; }
+
+    .timeline-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--accent-glow);
+      color: var(--accent);
+      padding: 0.25rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+      /* dates are numeric, keep LTR */
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+
+    .timeline-list { list-style: none; margin-top: 0.875rem; }
+
+    .timeline-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.45rem;
+      line-height: 1.65;
+    }
+
+    .timeline-list li::before {
+      content: '▸';
+      color: var(--accent-light);
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    body:not(.ltr) .timeline-list li::before { content: '◂'; }
+
+    /* ── CURRENT TAG ── */
+    .current-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(8,145,178,0.1);
+      border: 1px solid rgba(8,145,178,0.25);
+      color: var(--success);
+      padding: 0.18rem 0.6rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+      margin-inline-start: 0.5rem;
+    }
+    .current-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { padding: 6rem 0; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition);
+      box-shadow: var(--shadow);
+      color: var(--text);
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(79,70,229,0.15);
+    }
+
+    .project-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, var(--surface) 100%);
+    }
+
+    .project-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      /* URLs always LTR */
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+    .project-link svg { width: 13px; height: 13px; }
+
+    /* ── EDUCATION ── */
+    #education { padding: 6rem 0; background: var(--surface2); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: all var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .edu-card:hover {
+      border-color: var(--accent-light);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .edu-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+    .edu-icon.purple { background: rgba(99,102,241,0.1); }
+    .edu-icon.cyan   { background: rgba(8,145,178,0.1);  }
+    .edu-icon.gold   { background: rgba(217,119,6,0.1);  }
+
+    .edu-degree { font-weight: 800; margin-bottom: 0.2rem; font-size: 0.95rem; }
+    .edu-school { color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+    .edu-year   { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem; }
+
+    /* ── HACKATHON BANNER ── */
+    .hackathon-banner {
+      background: linear-gradient(135deg, rgba(217,119,6,0.06), rgba(99,102,241,0.06));
+      border: 1.5px solid rgba(217,119,6,0.25);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .trophy { width: 48px; height: 48px; flex-shrink: 0; }
+    .hackathon-title { font-size: 1.1rem; font-weight: 800; color: var(--gold); margin-bottom: 0.25rem; }
+    .hackathon-desc  { color: var(--text-muted); font-size: 0.875rem; line-height: 1.65; }
+
+    /* ── CONTACT ── */
+    #contact { padding: 6rem 0 8rem; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .contact-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .contact-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .contact-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.2rem; }
+
+    .contact-value {
+      font-weight: 700;
+      font-size: 0.92rem;
+      /* phone, email, address values: force LTR for correct display */
+    }
+
+    /* phone/email values always render LTR */
+    .contact-value.ltr-value {
+      direction: ltr;
+      unicode-bidi: embed;
+      display: block;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0.875rem 1rem; }
+      .nav-links { display: none; }
+      .hero-inner { grid-template-columns: 1fr !important; }
+      .hero-avatar { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-blob bg-blob-1"></div>
+<div class="bg-blob bg-blob-2"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">SA.</div>
+  <ul class="nav-links">
+    <li><a href="#skills"     data-ar="المهارات"    data-en="Skills">المهارات</a></li>
+    <li><a href="#experience" data-ar="الخبرات"     data-en="Experience">الخبرات</a></li>
+    <li><a href="#projects"   data-ar="المشاريع"    data-en="Projects">المشاريع</a></li>
+    <li><a href="#education"  data-ar="التعليم"     data-en="Education">التعليم</a></li>
+    <li><a href="#contact"    data-ar="التواصل"     data-en="Contact">التواصل</a></li>
+  </ul>
+  <button class="lang-btn" id="langToggle">English</button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span data-ar="متاح للفرص الوظيفية" data-en="Available for opportunities">متاح للفرص الوظيفية</span>
+        </div>
+
+        <h1 class="hero-name">
+          <span class="gradient-text" data-ar="صفوان" data-en="Safwan">صفوان</span><br>
+          <span data-ar="القليطي" data-en="Alqulayti">القليطي</span>
+        </h1>
+
+        <div class="hero-title" data-ar="مهندس برمجيات أول وقائد فريق" data-en="Senior Software Engineer &amp; Team Lead">
+          مهندس برمجيات أول وقائد فريق
+        </div>
+
+        <p class="hero-desc"
+           data-ar="أنا مهندس برمجيات، شغوف ببناء أفكار ومشاريع مميزة وتحويلها لمنتجات قوية وقابلة للتوسع، مبنية على أساس تقني مدروس. أحب أشتغل بروح الفريق، ودايم نسعى نطلع بشي له قيمة ويسهّل حياة الناس."
+           data-en="I'm a software engineer, passionate about building outstanding ideas and projects and turning them into powerful, scalable products with a solid technical foundation. I love working as a team, always pushing to ship something meaningful that makes people's lives easier.">
+          أنا مهندس برمجيات، شغوف ببناء أفكار ومشاريع مميزة وتحويلها لمنتجات قوية وقابلة للتوسع، مبنية على أساس تقني مدروس. أحب أشتغل بروح الفريق، ودايم نسعى نطلع بشي له قيمة ويسهّل حياة الناس.
+        </p>
+
+        <div class="hero-contact">
+          <a class="contact-chip" href="mailto:s.alqulayti@gmail.com">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span class="chip-text-ltr">s.alqulayti@gmail.com</span>
+          </a>
+          <a class="contact-chip" href="tel:+966560054277">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span class="chip-text-ltr">+966 56 005 4277</span>
+          </a>
+          <span class="contact-chip">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span data-ar="الرياض، المملكة العربية السعودية" data-en="Riyadh, Saudi Arabia">الرياض، المملكة العربية السعودية</span>
+          </span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">
+            <span data-ar="مشاريعي" data-en="View My Work">مشاريعي</span>
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="mailto:s.alqulayti@gmail.com" class="btn-outline">
+            <span data-ar="تواصل معي" data-en="Get in Touch">تواصل معي</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-avatar">
+        <div class="avatar-ring">
+          <div class="avatar-inner">SA</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label" data-ar="ما أعمل به" data-en="What I Work With">ما أعمل به</div>
+      <h2 class="section-title" data-ar="المهارات والتقنيات" data-en="Skills &amp; Technologies">المهارات والتقنيات</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React">
+        <span class="skill-name">React</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="Vue.js">
+        <span class="skill-name">Vue.js</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg" alt="NestJS">
+        <span class="skill-name">NestJS</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js">
+        <span class="skill-name">Node.js</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker">
+        <span class="skill-name">Docker</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git">
+        <span class="skill-name">Git</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">
+        <span class="skill-name">HTML</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">
+        <span class="skill-name">CSS</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="API">
+        <span class="skill-name" data-ar="تطوير API" data-en="API Dev">تطوير API</span>
+      </div>
+      <div class="skill-card fade-in">
+        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">
+        <span class="skill-name">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label" data-ar="المسيرة المهنية" data-en="Career Journey">المسيرة المهنية</div>
+      <h2 class="section-title" data-ar="الخبرة العملية" data-en="Work Experience">الخبرة العملية</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="timeline">
+
+      <!-- NHC -->
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role">
+                <span data-ar="قائد الفريق — مهندس برمجيات" data-en="Team Lead, Software Engineer">قائد الفريق — مهندس برمجيات</span>
+                <span class="current-tag" data-ar="حالياً" data-en="Current">حالياً</span>
+              </div>
+              <div class="timeline-company">NHC — <span data-ar="الرياض" data-en="Riyadh">الرياض</span></div>
+            </div>
+            <div class="timeline-date" data-ar="يناير 2026 – حتى الآن" data-en="Jan 2026 – Present">
+              يناير 2026 – حتى الآن
+            </div>
+          </div>
+          <ul class="timeline-list">
+            <li data-ar="إدارة وقيادة فريق تطوير الويب" data-en="Managing and leading the web development team">إدارة وقيادة فريق تطوير الويب</li>
+            <li data-ar="تطوير البوابة الرئيسية وبوابة الموظفين وبوابة المتدربين" data-en="Developing the main portal, internal portal, and trainee portal">تطوير البوابة الرئيسية وبوابة الموظفين وبوابة المتدربين</li>
+            <li data-ar="بناء بوابة فريق البيانات الداخلي وبوابة الاستثمار وبوابة العرض والمبيعات" data-en="Building internal data team portal, investment portal, and display &amp; sales portal">بناء بوابة فريق البيانات الداخلي وبوابة الاستثمار وبوابة العرض والمبيعات</li>
+            <li data-ar="تطوير خدمات الإشعارات عبر المنصات" data-en="Implementing notification services across platforms">تطوير خدمات الإشعارات عبر المنصات</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Digital City -->
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role" data-ar="مهندس برمجيات أول" data-en="Senior Software Engineer">مهندس برمجيات أول</div>
+              <div class="timeline-company">Digital City — <span data-ar="الرياض" data-en="Riyadh">الرياض</span></div>
+            </div>
+            <div class="timeline-date" data-ar="مارس 2023 – يناير 2025" data-en="Mar 2023 – Jan 2025">
+              مارس 2023 – يناير 2025
+            </div>
+          </div>
+          <ul class="timeline-list">
+            <li data-ar="المشاركة في تطوير مشاريع داخلية لتعزيز الإنتاجية" data-en="Participated in development of internal projects enhancing productivity">المشاركة في تطوير مشاريع داخلية لتعزيز الإنتاجية</li>
+            <li data-ar="تنفيذ استراتيجيات متكاملة للتطوير لمختلف التطبيقات" data-en="Implemented full-stack strategies for various applications">تنفيذ استراتيجيات متكاملة للتطوير لمختلف التطبيقات</li>
+            <li data-ar="إدارة عمليات النشر في بيئات مختلفة" data-en="Managed the deployment process across different environments">إدارة عمليات النشر في بيئات مختلفة</li>
+            <li data-ar="جمع وتحليل متطلبات الأنظمة لتقديم منتجات قابلة للتوسع" data-en="Gathered and analyzed system requirements to deliver scalable products">جمع وتحليل متطلبات الأنظمة لتقديم منتجات قابلة للتوسع</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Thiqah -->
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role" data-ar="مهندس برمجيات" data-en="Software Engineer">مهندس برمجيات</div>
+              <div class="timeline-company">Thiqah — <span data-ar="الرياض" data-en="Riyadh">الرياض</span></div>
+            </div>
+            <div class="timeline-date" data-ar="يونيو 2020 – مارس 2023" data-en="Jun 2020 – Mar 2023">
+              يونيو 2020 – مارس 2023
+            </div>
+          </div>
+          <ul class="timeline-list">
+            <li data-ar="المشاركة في مشاريع تطوير برمجيات متعددة" data-en="Participated in various software development projects">المشاركة في مشاريع تطوير برمجيات متعددة</li>
+            <li data-ar="تطوير تطبيقات ويب داخلية لإدارة الموارد وتعزيز إنتاجية الشركة" data-en="Developed internal web applications to manage resources and enhance productivity">تطوير تطبيقات ويب داخلية لإدارة الموارد وتعزيز إنتاجية الشركة</li>
+            <li data-ar="تدريب الموظفين الجدد والعمل معهم لإطلاق التطبيقات بشكل أسرع" data-en="Trained new employees and collaborated to ship applications faster">تدريب الموظفين الجدد والعمل معهم لإطلاق التطبيقات بشكل أسرع</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SABIC -->
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role" data-ar="مدير أنظمة" data-en="System Administrator">مدير أنظمة</div>
+              <div class="timeline-company">SABIC — <span data-ar="الجبيل" data-en="Al Jubail">الجبيل</span></div>
+            </div>
+            <div class="timeline-date" data-ar="يناير 2019 – أغسطس 2019" data-en="Jan 2019 – Aug 2019">
+              يناير 2019 – أغسطس 2019
+            </div>
+          </div>
+          <ul class="timeline-list">
+            <li data-ar="إدارة خوادم Exchange لأكثر من 50,000 مستخدم مع ضمان الأداء الأمثل" data-en="Managed Exchange servers for over 50,000 users, ensuring optimal performance">إدارة خوادم Exchange لأكثر من 50,000 مستخدم مع ضمان الأداء الأمثل</li>
+            <li data-ar="إدارة المشكلات التقنية للخوادم وحلها باحترافية عالية" data-en="Administered and troubleshot server issues with proficiency and problem-solving">إدارة المشكلات التقنية للخوادم وحلها باحترافية عالية</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label" data-ar="ما قمت ببنائه" data-en="What I've Built">ما قمت ببنائه</div>
+      <h2 class="section-title" data-ar="أبرز المشاريع" data-en="Selected Projects">أبرز المشاريع</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="projects-grid">
+
+      <a class="project-card fade-in" href="https://athathguide.com/ar" target="_blank" rel="noopener">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+          <svg width="52" height="52" fill="none" stroke="#d97706" stroke-width="1.5" viewBox="0 0 24 24" style="position:relative;z-index:1"><path d="M5 4h14a1 1 0 011 1v7H4V5a1 1 0 011-1z"/><path d="M4 12h16v3a2 2 0 01-2 2H6a2 2 0 01-2-2v-3z"/><path d="M7 17v2M17 17v2"/></svg>
+          <div class="thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" data-ar="دليل الأثاث" data-en="Furniture Guide">دليل الأثاث</div>
+          <div class="project-desc"
+               data-ar="منصة دليل أثاث شاملة باللغة العربية تربط المشترين بأفضل خيارات وموردي الأثاث في المنطقة."
+               data-en="A comprehensive Arabic furniture directory platform connecting buyers with the best furniture options and providers across the region.">
+            منصة دليل أثاث شاملة باللغة العربية تربط المشترين بأفضل خيارات وموردي الأثاث في المنطقة.
+          </div>
+          <div class="project-link">
+            athathguide.com
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card fade-in" href="https://ex4-beta.vercel.app/" target="_blank" rel="noopener">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #ede9fe, #ddd6fe);">
+          <svg width="52" height="52" fill="none" stroke="#7c3aed" stroke-width="1.5" viewBox="0 0 24 24" style="position:relative;z-index:1"><path d="M6 3l-4 6 10 12L22 9l-4-6H6z"/><path d="M2 9h20M6 3l2 6M18 3l-2 6M12 21L8 9M12 21l4-12"/></svg>
+          <div class="thumb-overlay" style="background: linear-gradient(180deg, transparent 40%, #fff 100%);"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" data-ar="منصة أرقى المنتجات" data-en="Premium Products Platform">منصة أرقى المنتجات</div>
+          <div class="project-desc"
+               data-ar="تجربة تجارة إلكترونية أنيقة تعرض أرقى المنتجات بواجهة عصرية راقية مصممة للعملاء الباحثين عن التميز."
+               data-en="An elegant e-commerce experience showcasing premium products with a modern, high-end interface designed for discerning customers.">
+            تجربة تجارة إلكترونية أنيقة تعرض أرقى المنتجات بواجهة عصرية راقية مصممة للعملاء الباحثين عن التميز.
+          </div>
+          <div class="project-link">
+            ex4-beta.vercel.app
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card fade-in" href="https://extraordinary-toffee-fec2e.netlify.app/" target="_blank" rel="noopener">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+          <svg width="52" height="52" fill="none" stroke="#059669" stroke-width="1.5" viewBox="0 0 24 24" style="position:relative;z-index:1"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><path d="M12 12v3M8 12h8"/></svg>
+          <div class="thumb-overlay" style="background: linear-gradient(180deg, transparent 40%, #fff 100%);"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" data-ar="موقع شركة استشارات" data-en="Consulting Firm Website">موقع شركة استشارات</div>
+          <div class="project-desc"
+               data-ar="موقع شركة استشارات احترافي بتصميم نظيف يعكس الثقة والخبرة والمصداقية في عالم الأعمال."
+               data-en="A professional corporate website for a consulting company, featuring a clean design that communicates trust, expertise, and business credibility.">
+            موقع شركة استشارات احترافي بتصميم نظيف يعكس الثقة والخبرة والمصداقية في عالم الأعمال.
+          </div>
+          <div class="project-link">
+            extraordinary-toffee-fec2e.netlify.app
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card fade-in" href="https://harmonious-kulfi-88f306.netlify.app/" target="_blank" rel="noopener">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #e0e7ff, #c7d2fe);">
+          <svg width="52" height="52" fill="none" stroke="#4f46e5" stroke-width="1.5" viewBox="0 0 24 24" style="position:relative;z-index:1"><path d="M12 3v18M3 9l9-6 9 6"/><path d="M5 9l-2 6a4 4 0 008 0L9 9"/><path d="M15 9l-2 6a4 4 0 008 0l-2-6"/><path d="M5 20h14"/></svg>
+          <div class="thumb-overlay" style="background: linear-gradient(180deg, transparent 40%, #fff 100%);"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" data-ar="موقع مكتب محاماة" data-en="Law Firm Website">موقع مكتب محاماة</div>
+          <div class="project-desc"
+               data-ar="موقع مكتب محاماة متميز بحضور قوي، مصمم لبث الثقة وإبراز الخبرة القانونية والخدمات المقدمة."
+               data-en="A sophisticated law firm website with a commanding presence, designed to inspire confidence and highlight legal expertise and services.">
+            موقع مكتب محاماة متميز بحضور قوي، مصمم لبث الثقة وإبراز الخبرة القانونية والخدمات المقدمة.
+          </div>
+          <div class="project-link">
+            harmonious-kulfi-88f306.netlify.app
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label" data-ar="الخلفية الأكاديمية" data-en="Academic Background">الخلفية الأكاديمية</div>
+      <h2 class="section-title" data-ar="التعليم والشهادات" data-en="Education &amp; Certifications">التعليم والشهادات</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <div class="edu-icon purple">
+          <svg width="22" height="22" fill="none" stroke="#4f46e5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5"/></svg>
+        </div>
+        <div>
+          <div class="edu-degree" data-ar="بكالوريوس هندسة حاسوب" data-en="Bachelor in Computer Engineering">بكالوريوس هندسة حاسوب</div>
+          <div class="edu-school" data-ar="جامعة طيبة" data-en="Taibah University">جامعة طيبة</div>
+        </div>
+      </div>
+      <div class="edu-card fade-in">
+        <div class="edu-icon cyan">
+          <svg width="22" height="22" fill="none" stroke="#0891b2" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l3 3-3 3M13 14h4"/></svg>
+        </div>
+        <div>
+          <div class="edu-degree" data-ar="هندسة البرمجيات" data-en="Software Engineering">هندسة البرمجيات</div>
+          <div class="edu-school" data-ar="General Assembly، جدة" data-en="General Assembly, Jeddah">General Assembly، جدة</div>
+        </div>
+      </div>
+      <div class="edu-card fade-in">
+        <div class="edu-icon gold">
+          <svg width="22" height="22" fill="none" stroke="#d97706" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <div>
+          <div class="edu-degree" data-ar="شهادة MCSA" data-en="MCSA Certification">شهادة MCSA</div>
+          <div class="edu-school">Microsoft</div>
+          <div class="edu-year" data-ar="يناير 2019" data-en="January 2019">يناير 2019</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hackathon-banner fade-in">
+      <div class="trophy">
+        <svg width="48" height="48" fill="none" stroke="#d97706" stroke-width="1.6" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4"/><path d="M5 3H3a2 2 0 000 4c0 2.5 2 4.5 4.5 5"/><path d="M19 3h2a2 2 0 010 4c0 2.5-2 4.5-4.5 5"/><path d="M7 3h10v8a5 5 0 01-10 0V3z"/></svg>
+      </div>
+      <div>
+        <div class="hackathon-title"
+             data-ar="الفائز بهاكاثون 2023 — المركز الأول من بين أكثر من 600 مشارك"
+             data-en="Hackathon Winner 2023 — 1st Place among 600+ participants">
+          الفائز بهاكاثون 2023 — المركز الأول من بين أكثر من 600 مشارك
+        </div>
+        <div class="hackathon-desc"
+             data-ar="تطوير منصة مبتكرة تربط أصحاب المتاجر بالموردين، مما يتيح عمليات شراء أسرع وعلاقات تجارية أفضل على طول سلسلة التوريد."
+             data-en="Developed an innovative platform to connect store owners with suppliers, enabling faster procurement and better business relationships across the supply chain.">
+          تطوير منصة مبتكرة تربط أصحاب المتاجر بالموردين، مما يتيح عمليات شراء أسرع وعلاقات تجارية أفضل على طول سلسلة التوريد.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label" data-ar="لنتواصل" data-en="Let's Connect">لنتواصل</div>
+      <h2 class="section-title" data-ar="تواصل معي" data-en="Get in Touch">تواصل معي</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-grid fade-in">
+
+      <a class="contact-card" href="mailto:s.alqulayti@gmail.com">
+        <div class="contact-icon">
+          <svg width="20" height="20" fill="none" stroke="#4f46e5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</div>
+          <div class="contact-value ltr-value">s.alqulayti@gmail.com</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="tel:+966560054277">
+        <div class="contact-icon">
+          <svg width="20" height="20" fill="none" stroke="#4f46e5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label" data-ar="الهاتف" data-en="Phone">الهاتف</div>
+          <div class="contact-value ltr-value">+966 56 005 4277</div>
+        </div>
+      </a>
+
+      <div class="contact-card" style="cursor:default;">
+        <div class="contact-icon">
+          <svg width="20" height="20" fill="none" stroke="#4f46e5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+        </div>
+        <div>
+          <div class="contact-label" data-ar="الموقع" data-en="Location">الموقع</div>
+          <div class="contact-value" data-ar="الرياض، المملكة العربية السعودية" data-en="Riyadh, Saudi Arabia">الرياض، المملكة العربية السعودية</div>
+        </div>
+      </div>
+
+      <div class="contact-card" style="cursor:default;">
+        <div class="contact-icon">
+          <svg width="20" height="20" fill="none" stroke="#0891b2" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="contact-label" data-ar="الحالة" data-en="Status">الحالة</div>
+          <div class="contact-value" style="color: var(--success);"
+               data-ar="متاح للفرص الوظيفية" data-en="Open to opportunities">متاح للفرص الوظيفية</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span data-ar="© 2026 صفوان القليطي. صُنع بشغف." data-en="© 2026 Safwan Alqulayti. Built with passion.">
+    © 2026 صفوان القليطي. صُنع بشغف.
+  </span>
+</footer>
+
+<script>
+  // ── LANGUAGE ──
+  let isArabic = true;
+  const langBtn = document.getElementById('langToggle');
+
+  function setLanguage(arabic) {
+    isArabic = arabic;
+    const html = document.documentElement;
+
+    if (arabic) {
+      html.setAttribute('lang', 'ar');
+      html.setAttribute('dir', 'rtl');
+      document.body.classList.remove('ltr');
+      langBtn.textContent = 'English';
+    } else {
+      html.setAttribute('lang', 'en');
+      html.setAttribute('dir', 'ltr');
+      document.body.classList.add('ltr');
+      langBtn.textContent = 'عربي';
+    }
+
+    const key = arabic ? 'ar' : 'en';
+    document.querySelectorAll('[data-ar]').forEach(el => {
+      if (el.dataset[key]) {
+        el.innerHTML = el.dataset[key];
+      }
+    });
+  }
+
+  langBtn.addEventListener('click', () => setLanguage(!isArabic));
+
+  // ── FADE IN ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 8) * 0.06}s`;
+    observer.observe(el);
+  });
+
+  // ── ACTIVE NAV ──
+  const sections  = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-links a');
+
+  new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + entry.target.id
+            ? 'var(--accent)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.35 }).observe.bind(
+    new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting)
+          navLinks.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + entry.target.id ? 'var(--accent)' : '';
+          });
+      });
+    }, { threshold: 0.35 })
+  );
+
+  sections.forEach(s => {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting)
+        navLinks.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + s.id ? 'var(--accent)' : '';
+        });
+    }, { threshold: 0.35 }).observe(s);
+  });
+</script>
+
+</body>
+</html>
